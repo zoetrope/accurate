@@ -45,7 +45,10 @@ func subMain(ns, addr string, port int) error {
 		return fmt.Errorf("unable to load the configuration file: %w", err)
 	}
 
-	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
+	k8sCfg := ctrl.GetConfigOrDie()
+	k8sCfg.QPS = float32(50)
+	k8sCfg.Burst = int(k8sCfg.QPS * 1.5)
+	mgr, err := ctrl.NewManager(k8sCfg, ctrl.Options{
 		Scheme:                  scheme,
 		NewClient:               cluster.NewCachingClient,
 		MetricsBindAddress:      options.metricsAddr,
