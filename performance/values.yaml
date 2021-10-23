@@ -1,0 +1,17 @@
+image:
+  repository: accurate
+  tag: dev
+  pullPolicy: Never
+
+controller:
+  extraArgs:
+    - --zap-log-level=5
+
+  config:
+    watches:
+      - group: rbac.authorization.k8s.io
+        version: v1
+        kind: Role
+      - group: rbac.authorization.k8s.io
+        version: v1
+        kind: RoleBinding
