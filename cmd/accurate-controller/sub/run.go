@@ -114,6 +114,7 @@ func subMain(ns, addr string, port int) error {
 		}
 		logger.Info("watching", "gvk", res.GroupVersionKind().String())
 	}
+	go controllers.Logging(ctx)
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {
 		return fmt.Errorf("unable to set up health check: %w", err)

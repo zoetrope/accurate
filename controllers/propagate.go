@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"sync/atomic"
+	"time"
 
 	"github.com/cybozu-go/accurate/pkg/constants"
 	corev1 "k8s.io/api/core/v1"
@@ -18,6 +20,42 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
 )
+
+var totalReconciles int32
+var currReconciles int32
+
+func Logging(ctx context.Context) {
+	logger := log.FromContext(ctx).WithName("logging")
+	logger.Info("starting logging")
+
+	working := false
+	lastTotal := atomic.LoadInt32(&totalReconciles)
+
+	for {
+		select {
+		case <-ctx.Done():
+			logger.Error(ctx.Err(), "logging done")
+			return
+		case <-time.After(500 * time.Millisecond):
+		}
+		total := atomic.LoadInt32(&totalReconciles)
+		current := atomic.LoadInt32(&currReconciles)
+		if total != lastTotal || current != 0 {
+			if !working {
+				working = true
+				logger.Info("Activity", "Status", "start", "Total", total, "Current", current)
+			} else {
+				logger.Info("Activity", "Status", "continue", "Total", total, "Current", current)
+			}
+		} else {
+			if working {
+				working = false
+				logger.Info("Activity", "Status", "finish", "Total", total, "Current", current)
+			}
+		}
+		lastTotal = total
+	}
+}
 
 const notGenerated = "false"
 
@@ -73,6 +111,10 @@ func NewPropagateController(res *unstructured.Unstructured) *PropagateController
 func (r *PropagateController) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 	logger.V(5).Info("reconciling")
+
+	atomic.AddInt32(&totalReconciles, 1)
+	atomic.AddInt32(&currReconciles, 1)
+	defer atomic.AddInt32(&currReconciles, -1)
 
 	obj := r.res.DeepCopy()
 	if err := r.Get(ctx, req.NamespacedName, obj); err != nil {
