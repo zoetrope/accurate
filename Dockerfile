@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOOARCH=$TARGETPLATFORM \
 	go build -ldflags="-w -s" -o accurate-controller ./cmd/accurate-controller
 
 # the controller image, this is in the target architecture.
-FROM scratch
+FROM ubuntu:24.04
 LABEL org.opencontainers.image.source https://github.com/zoetrope/accurate
 
 COPY --from=builder /work/accurate-controller ./
