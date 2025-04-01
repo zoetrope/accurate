@@ -5,11 +5,11 @@ COPY ./ .
 
 # Build the binary, cross-compiling if necessary
 ARG TARGETPLATFORM
-RUN CGO_ENABLED=0 GOOS=linux GOOARCH=$TARGETPLATFORM \
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETPLATFORM \
 	go build -ldflags="-w -s" -o accurate-controller ./cmd/accurate-controller
 
 # the controller image, this is in the target architecture.
-FROM ghcr.io/cybozu/ubuntu-debug:24.04
+FROM --platform=$BUILDPLATFORM ghcr.io/cybozu/ubuntu-debug:24.04
 LABEL org.opencontainers.image.source https://github.com/zoetrope/accurate
 
 COPY --from=builder /work/accurate-controller ./
