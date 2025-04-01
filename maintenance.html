@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Reconciliation rules - Accurate Documentation</title>
+        <title>Maintenance - Accurate Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -129,7 +129,7 @@
                         <a href="https://github.com/cybozu-go/accurate" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/cybozu-go/accurate/edit/main/docs/./reconcile.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/cybozu-go/accurate/edit/main/docs/./maintenance.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -158,88 +158,28 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="how-accurate-reconciles-resources"><a class="header" href="#how-accurate-reconciles-resources">How Accurate reconciles resources</a></h1>
-<p>Accurate primarily watches Namespaces and SubNamespaces.
-In addition, it needs to watch any kind of resources specified in its config file.</p>
-<h2 id="subnamespace-custom-resource"><a class="header" href="#subnamespace-custom-resource">SubNamespace (custom resource)</a></h2>
+                        <h1 id="maintenance"><a class="header" href="#maintenance">Maintenance</a></h1>
+<h2 id="how-to-update-supported-kubernetes"><a class="header" href="#how-to-update-supported-kubernetes">How to update supported Kubernetes</a></h2>
+<p>Accurate supports the three latest Kubernetes versions.
+If a new Kubernetes is released, please update the following files.</p>
 <ul>
-<li>For a new SubNamespace, Accurate creates a sub-namespace.</li>
-<li>For a deleting SubNamespace, Accurate deletes the sub-namespace if the sub-namespace exists and its <code>accurate.cybozu.com/parent</code> is the same as <code>metadata.namespace</code> of SubNamespace.</li>
+<li>Update Kubernetes version in <code>e2e/Makefile</code> and <code>.github/workflows/ci.yaml</code>.</li>
+<li>Update kubectl version in <code>aqua.yaml</code>.</li>
+<li>Update <code>k8s.io/*</code> and <code>sigs.k8s.io/controller-runtime</code> packages version in <code>go.mod</code>.</li>
 </ul>
-<h2 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h2>
-<h3 id="namespaces-that-are-labeled-with-accuratecybozucomtemplate"><a class="header" href="#namespaces-that-are-labeled-with-accuratecybozucomtemplate">Namespaces that are labeled with <code>accurate.cybozu.com/template</code></a></h3>
-<p>These namespaces reference a template namespace and propagate the labels, annotations, and watched resources from the template namespace.</p>
-<ul>
-<li>Accurate should propagate labels and/or annotations from the template namespace.</li>
-<li>Accurate should create copies of resources in the template namespace whose <code>accurate.cybozu.com/propagate</code> annotation is <code>create</code> if they are missing.</li>
-<li>Accurate should create or update copies of resources in the template namespace whose <code>accurate.cybozu.com/propagate</code> annotation is <code>update</code> if they are missing or different.</li>
-<li>Accurate should delete resources in the reconciling namespace that are annotated with <code>accurate.cybozu.com/propagate=update</code> provided that:
-<ul>
-<li>the value of <code>accurate.cybozu.com/from</code> annotation is not the template namespace name, or</li>
-<li>there is not a resource of the same kind and the same name in the template namespace.</li>
-</ul>
-</li>
-</ul>
-<h3 id="namespaces-wo-accuratecybozucomtype-and-accuratecybozucomtemplate-labels"><a class="header" href="#namespaces-wo-accuratecybozucomtype-and-accuratecybozucomtemplate-labels">Namespaces w/o <code>accurate.cybozu.com/type</code> and <code>accurate.cybozu.com/template</code> labels</a></h3>
-<p>If these labels are removed from the Namespace, Accurate should delete propagated resources with mode == <code>update</code>.</p>
-<h3 id="template-namespace"><a class="header" href="#template-namespace">Template namespace</a></h3>
-<p>Template namespaces are namespaces labeled with <code>accurate.cybozu.com/type=template</code>.</p>
-<ul>
-<li>Accurate should propagate labels and/or annotations to namespaces that references the template namespace with <code>accurate.cybozu.com/template</code> label.</li>
-</ul>
-<h3 id="root-namespace"><a class="header" href="#root-namespace">Root namespace</a></h3>
-<p>Root namespaces are namespaces labeled with <code>accurate.cybozu.com/type=root</code>.</p>
-<ul>
-<li>Accurate should propagate labels and/or annotations to its sub-namespaces.</li>
-</ul>
-<h3 id="sub-namespace"><a class="header" href="#sub-namespace">Sub-namespace</a></h3>
-<p>Sub-namespaces are namespaces created by Accurate.
-Sub-namespaces have <code>accurate.cybozu.com/parent</code> label.</p>
-<ul>
-<li>Accurate should propagate labels and/or annotations from the parent namespace.</li>
-<li>Accurate should propagate labels and/or annotations of the reconciling namespace to its sub-namespaces, if any.</li>
-<li>Accurate should create copies of resources in the parent namespace whose <code>accurate.cybozu.com/propagate</code> annotation is <code>create</code> if they are missing.</li>
-<li>Accurate should create or update copies of resources in the parent namespace whose <code>accurate.cybozu.com/propagate</code> annotation is <code>update</code> if they are missing or different.</li>
-<li>Accurate should delete resources in the reconciling namespace that are annotated with <code>accurate.cybozu.com/propagate=update</code> provided that:
-<ul>
-<li>the value of <code>accurate.cybozu.com/from</code> annotation is not the parent namespace name, or</li>
-<li>there is not a resource of the same kind and the same name in the parent namespace.</li>
-</ul>
-</li>
-</ul>
-<h2 id="watched-namespace-scoped-resources"><a class="header" href="#watched-namespace-scoped-resources">Watched namespace-scoped resources</a></h2>
-<p>Any namespace-scoped resource can be propagated from a template or from a parent namespace.</p>
-<h3 id="resources-annotated-with-accuratecybozucomfrom"><a class="header" href="#resources-annotated-with-accuratecybozucomfrom">Resources annotated with <code>accurate.cybozu.com/from</code></a></h3>
-<p>These resources are propagated from a parent or a template namespace.
-The annotation value is the parent namespace name.</p>
-<ul>
-<li>If the parent resource exists and is annotated with <code>accurate.cybozu.com/propagate=update</code>, Accurate compares the resource with the parent resource, and if they differ, updates the resource.</li>
-<li>If the resource is annotated with <code>accurate.cybozu.com/propagate=update</code> and there isn't a resource of the same kind and the same name in the parent namespace, Accurate deletes the resource.</li>
-</ul>
-<p>The last rule is for cases where the parent resource is deleted while the controller is stopped.
-With this rule, Accurate can delete such orphaned resources when the controller starts.</p>
-<h3 id="resources-annotated-with-accuratecybozucompropagate"><a class="header" href="#resources-annotated-with-accuratecybozucompropagate">Resources annotated with <code>accurate.cybozu.com/propagate</code></a></h3>
-<p>These resources can be propagated to other namespaces.</p>
-<ul>
-<li>If the resource exists and the annotation value is <code>create</code>, Accurate creates a copy in all sub-namespaces if missing.</li>
-<li>If the resource exists and the annotation value is <code>update</code>, Accurate creates or updates a copy in all sub-namespaces if missing or different.</li>
-<li>When a resource is deleted, Accurate checks sub-namespaces and delete the resource of the same kind and the same name if the resource is annotated with <code>accurate.cybozu.com/propagate=update</code>.</li>
-</ul>
-<h3 id="resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated-deprecated"><a class="header" href="#resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated-deprecated">Resources owned by another resource that is annotated with <code>accurate.cybozu.com/propagate-generated</code> (DEPRECATED)</a></h3>
-<p>Accurate annotates the resource with <code>accurate.cybozu.com/propagate</code>.
-The annotation value is the same as <code>accurate.cybozu.com/propagate-generated</code> annotation.</p>
+<p>If Kubernetes or controller-runtime API has changed, please fix the relevant source code.</p>
+<h2 id="how-to-update-dependencies"><a class="header" href="#how-to-update-dependencies">How to update dependencies</a></h2>
+<p>Renovate will create PRs that update dependencies once a week.
+However, Kubernetes is only updated with patched versions.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="design.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="release.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="release.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -247,13 +187,10 @@ The annotation value is the same as <code>accurate.cybozu.com/propagate-generate
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="design.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="release.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="release.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

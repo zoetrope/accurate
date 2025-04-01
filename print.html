@@ -1,48 +1,49 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Accurate Documentation</title>
-                <meta name="robots" content="noindex" />
-                
+        <meta name="robots" content="noindex">
+
 
         <!-- Custom HTML head -->
-        
 
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-                <link rel="icon" href="favicon.svg">
-                        <link rel="shortcut icon" href="favicon.png">
-                <link rel="stylesheet" href="css/variables.css">
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-                <link rel="stylesheet" href="css/print.css" media="print">
-        
+        <link rel="stylesheet" href="css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-                <link rel="stylesheet" href="fonts/fonts.css">
-        
+        <link rel="stylesheet" href="fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-            </head>
-    <body>
+
+
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -58,74 +59,82 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
+            sidebar_toggle.checked = sidebar === 'visible';
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Accurate</a></li><li class="chapter-item expanded affix "><li class="part-title">User manual</li><li class="chapter-item expanded "><a href="overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li class="chapter-item expanded "><a href="getting_started.html"><strong aria-hidden="true">3.</strong> Getting started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="config.html"><strong aria-hidden="true">3.1.</strong> Configurations</a></li><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">3.2.</strong> Deploying Accurate</a></li><li class="chapter-item expanded "><a href="helm.html"><strong aria-hidden="true">3.3.</strong> Helm Chart</a></li><li class="chapter-item expanded "><a href="install-plugin.html"><strong aria-hidden="true">3.4.</strong> Installing kubectl plugin</a></li></ol></li><li class="chapter-item expanded "><a href="usage.html"><strong aria-hidden="true">4.</strong> Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="info.html"><strong aria-hidden="true">4.1.</strong> Showing information</a></li><li class="chapter-item expanded "><a href="templates.html"><strong aria-hidden="true">4.2.</strong> Setting up templates</a></li><li class="chapter-item expanded "><a href="propagation.html"><strong aria-hidden="true">4.3.</strong> Propagating resources</a></li><li class="chapter-item expanded "><a href="subnamespaces.html"><strong aria-hidden="true">4.4.</strong> Sub-namespace operations</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">References</li><li class="chapter-item expanded "><a href="crd_subnamespace.html"><strong aria-hidden="true">5.</strong> SubNamespace custom resource</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">6.</strong> Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="kubectl-accurate.html"><strong aria-hidden="true">6.1.</strong> kubectl-accurate</a></li><li class="chapter-item expanded "><a href="accurate-controller.html"><strong aria-hidden="true">6.2.</strong> accurate-controller</a></li></ol></li><li class="chapter-item expanded "><a href="labels.html"><strong aria-hidden="true">7.</strong> Labels</a></li><li class="chapter-item expanded "><a href="annotations.html"><strong aria-hidden="true">8.</strong> Annotations</a></li><li class="chapter-item expanded affix "><li class="part-title">Developer documents</li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">9.</strong> Design notes</a></li><li class="chapter-item expanded "><a href="reconcile.html"><strong aria-hidden="true">10.</strong> Reconciliation rules</a></li><li class="chapter-item expanded "><a href="release.html"><strong aria-hidden="true">11.</strong> Release procedure</a></li></ol>            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                                            </div>
+                    </div>
 
                     <h1 class="menu-title">Accurate Documentation</h1>
 
                     <div class="right-buttons">
-                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                                                                        <a href="https://github.com/cybozu-go/accurate" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/cybozu-go/accurate" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                                                
+
                     </div>
                 </div>
 
-                                <div id="search-wrapper" class="hidden">
+                <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
                         <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
@@ -135,9 +144,9 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -189,11 +198,10 @@ Without propagating Role/RoleBinding, the tenant user would be able to do nothin
 <ul>
 <li>
 <p>Resource propagation between namespaces</p>
-<p>Accurate can propagate any namespace-scope resource including custom resources between Namespaces.
-Moreover, Accurate can detect generated resources owned by another resource and propagate them.</p>
+<p>Accurate can propagate any namespace-scope resource including custom resources between Namespaces.</p>
 </li>
 <li>
-<p>Inheriting labels and annotations from parent namespaces</p>
+<p>Inheriting labels and annotations creation/update from parent namespaces</p>
 <p>Namespace labels often play important roles.
 For example, <a href="https://github.com/kubernetes/website/blob/dev-1.22/content/en/docs/concepts/security/pod-security-admission.md#pod-security-admission-labels-for-namespaces">Pod Security Admission</a>, a new feature planned for Kubernetes 1.22, uses Namespace labels to control security policies.</p>
 </li>
@@ -224,7 +232,7 @@ Labels, annotations, and resources can be propagated from a template Namespace t
 </ul>
 <p>Any Namespace other than sub-namespaces can reference a template Namespace with <code>accurate.cybozu.com/template=&lt;name&gt;</code> label.</p>
 <p>Sub-namespace can reference a root or another sub-namespace as its parent.</p>
-<p>Accurate propagates the Namespace labels, annotations, and namespace-scope resources from a referenced Namespace to referencing Namespaces.</p>
+<p>When configured to do so, Accurate propagates the Namespace labels, annotations, and namespace-scope resources from a referenced Namespace to referencing Namespaces.</p>
 <p>Circular references are prohibited by an admission webhook.</p>
 <h2 id="resource-propagation"><a class="header" href="#resource-propagation">Resource propagation</a></h2>
 <p>Accurate propagates any namespace-scope resource that are annotated with <code>accurate.cybozu.com/propagate=&lt;mode&gt;</code>.</p>
@@ -233,7 +241,12 @@ Labels, annotations, and resources can be propagated from a template Namespace t
 <li><code>create</code>: the resource will be created in referencing Namespaces if missing.</li>
 <li><code>update</code>: the resource will be created in referencing Namespaces if missing, or will be updated if not identical, or will be deleted when the resource in the referenced Namespace is deleted.</li>
 </ul>
-<h2 id="propagating-generated-resources"><a class="header" href="#propagating-generated-resources">Propagating generated resources</a></h2>
+<h2 id="propagating-generated-resources-deprecated"><a class="header" href="#propagating-generated-resources-deprecated">Propagating generated resources (DEPRECATED)</a></h2>
+<blockquote>
+<p>[!WARNING]<br />
+Propagating generated resources is a deprecated feature and is subject for
+removal soon.</p>
+</blockquote>
 <p>If a resource annotated with <code>accurate.cybozu.com/propagate-generated=&lt;mode&gt;</code> creates a resource and set an owner reference in the created resource, Accurate automatically adds <code>accurate.cybozu.com/propagate=&lt;mode&gt;</code> to the created resource.</p>
 <p>This can be used, for example, to propagate Secret created from <a href="https://github.com/bitnami-labs/sealed-secrets">SealedSecret</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
@@ -250,18 +263,30 @@ Labels, annotations, and resources can be propagated from a template Namespace t
 <p><a href="accurate-controller.html"><code>accurate-controller</code></a> reads its configurations from a configuration file.</p>
 <p>The repository includes an example as follows:</p>
 <pre><code class="language-yaml"># Labels to be propagated to sub-namespaces.
-# It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.
+# It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
 # https://pkg.go.dev/path#Match
 labelKeys:
 - team
 
 # Annotations to be propagated to sub-namespaces.
-# It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.
+# It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
 # https://pkg.go.dev/path#Match
 annotationKeys:
 # An example to propagate an annotation for MetalLB
 # https://metallb.universe.tf/usage/#requesting-specific-ips
 - metallb.universe.tf/address-pool
+
+# Labels to be propagated to sub-namespaces from SubNamespace resource.
+# It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
+# https://pkg.go.dev/path#Match
+subNamespaceLabelKeys:
+- app
+
+# Annotations to be propagated to sub-namespaces from SubNamespace resource.
+# It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
+# https://pkg.go.dev/path#Match
+subNamespaceAnnotationKeys:
+- foo.bar/baz
 
 # List of GVK for namespace-scoped resources that can be propagated.
 # Any namespace-scoped resource is allowed.
@@ -276,26 +301,53 @@ watches:
   kind: Secret
 - version: v1
   kind: ResourceQuota
+
+# List of nameing policy for SubNamespaces.
+# root and match are both regular expressions.
+# When a SubNamespace is created in a tree starting from a root namespace and the root namespace's name matches the "root" regular expression, the SubNamespace name is validated with the "match" regular expression.
+#
+# "match" namingPolicies can use variables of regexp capture group naming of "root" namingPolicies.
+# example:
+#   root: ^app-(?P&lt;team&gt;.*)
+#   match: ^app-${team}-.*
+#   root namespace: app-team1
+#   compiled match naming policy: ^app-team1-.*
+# This feature is provided using https://pkg.go.dev/regexp#Regexp.Expand
+namingPolicies: []
 </code></pre>
-<p>Only labels and annotations specified in the configuration file will be inherited.</p>
+<p>Only labels and annotations specified in the configuration file will be inherited.<br />
+Be careful that some labels or annotations affect security configurations or the system.
+For example, <a href="https://kubernetes.io/docs/concepts/security/pod-security-admission/#pod-security-admission-labels-for-namespaces"><code>pod-security.kubernetes.io/*</code></a> labels control the security capabilities of Pods in a Namespace.</p>
 <p>Likewise, Accurate watches only namespace-scope resources specified in the configuration file.</p>
 <p>You can edit the Helm Chart values as needed.</p>
 <pre><code class="language-yaml">&lt;snip&gt;
 controller:
   config:
     # controller.config.labelKeys -- Labels to be propagated to sub-namespaces.
-    # It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.
+    # It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
     ## https://pkg.go.dev/path#Match
     labelKeys: []
     # - team
 
     # controller.config.annotationKeys -- Annotations to be propagated to sub-namespaces.
-    # It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.
+    # It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
     ## https://pkg.go.dev/path#Match
     annotationKeys: []
     # An example to propagate an annotation for MetalLB
     # https://metallb.universe.tf/usage/#requesting-specific-ips
     # - metallb.universe.tf/address-pool
+
+    # Labels to be propagated to sub-namespaces from SubNamespace resource.
+    # It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
+    # https://pkg.go.dev/path#Match
+    subNamespaceLabelKeys:
+    - app
+
+    # Annotations to be propagated to sub-namespaces from SubNamespace resource.
+    # It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.
+    # https://pkg.go.dev/path#Match
+    subNamespaceAnnotationKeys:
+    - foo.bar/baz
 
     # controller.config.watches -- List of GVK for namespace-scoped resources that can be propagated.
     # Any namespace-scoped resource is allowed.
@@ -308,6 +360,25 @@ controller:
         kind: RoleBinding
       - version: v1
         kind: Secret
+
+    # controller.config.namingPolicies -- List of nameing policy for SubNamespaces.
+    # root and match are both regular expressions.
+    # When a SubNamespace is created in a tree starting from a root namespace and the root namespace's name matches the "root" regular expression, the SubNamespace name is validated with the "match" regular expression.
+    #
+    # "match" namingPolicies can use variables of regexp capture group naming of "root" namingPolicies.
+    # example:
+    #   root: ^app-(?P&lt;team&gt;.*)
+    #   match: ^app-${team}-.*
+    #   root namespace: app-team1
+    #   compiled match naming policy: ^app-team1-.*
+    # This feature is provided using https://pkg.go.dev/regexp#Regexp.Expand
+    namingPolicies:
+      - root:  foo
+        match: foo_.*
+      - root:  bar
+        match: bar_.*
+      - root:  ^app-(?P&lt;team&gt;.*)
+        match: ^app-${team}-.*
 &lt;snip&gt;
 </code></pre>
 <h2 id="clusterrolebindings"><a class="header" href="#clusterrolebindings">ClusterRoleBindings</a></h2>
@@ -323,7 +394,7 @@ controller:
     # The rules defined here will be used for the ClusterRole rules.
     rules:
       - apiGroups:
-          - &quot;&quot;
+          - ""
         resources:
           - resourcequotas
         verbs:
@@ -331,11 +402,35 @@ controller:
           - list
           - watch
           - create
-          - update
           - patch
           - delete
 &lt;snip&gt;
 </code></pre>
+<h2 id="feature-gates"><a class="header" href="#feature-gates">Feature Gates</a></h2>
+<p>Feature gates are a set of key=value pairs that describe operator features.
+You can turn these features on or off using the <code>--feature-gates</code> command line flag.
+Use <code>-h</code> flag to see a full set of feature gates.</p>
+<p>To set feature gates, use the <code>--feature-gates</code> flag assigned to a list of feature pairs:</p>
+<pre><code class="language-shell">--feature-gates=...,DisablePropagateGenerated=false
+</code></pre>
+<p>The following table is a summary of the feature gates that you can set.</p>
+<ul>
+<li>The "Since" column contains the Accurate release when a feature is introduced
+or its release stage is changed.</li>
+<li>The "Until" column, if not empty, contains the last Accurate release in which
+you can still use a feature gate.</li>
+</ul>
+<p>{{&lt; table caption="Feature gates for features in Alpha or Beta states" sortable="true" &gt;}}</p>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Default</th><th>Stage</th><th>Since</th><th>Until</th></tr></thead><tbody>
+<tr><td><code>DisablePropagateGenerated</code></td><td><code>false</code></td><td>Alpha</td><td>1.2.0</td><td>1.3.0</td></tr>
+<tr><td><code>DisablePropagateGenerated</code></td><td><code>true</code></td><td>Beta</td><td>1.3.0</td><td></td></tr>
+</tbody></table>
+</div>
+<p>Each feature gate is designed for enabling/disabling a specific feature:</p>
+<ul>
+<li><code>DisablePropagateGenerated</code>: Disable <a href="concepts.html#propagating-generated-resources">propagating generated resources</a>,
+which is a feature subject for removal soon.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deploying-accurate"><a class="header" href="#deploying-accurate">Deploying Accurate</a></h1>
 <ol>
 <li>
@@ -372,6 +467,21 @@ helm repo update
 <h3 id="installing-cert-manager"><a class="header" href="#installing-cert-manager">Installing cert-manager</a></h3>
 <pre><code class="language-console">$ curl -fsL https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml | kubectl apply -f -
 </code></pre>
+<h3 id="installing-customresourcedefinitions-optional"><a class="header" href="#installing-customresourcedefinitions-optional">Installing CustomResourceDefinitions (optional)</a></h3>
+<p>Accurate does not use the <a href="https://helm.sh/docs/chart_best_practices/custom_resource_definitions/">official helm method</a> of installing CRD resources.
+This is because it makes upgrading CRDs impossible with helm CLI alone.
+The helm team explain the limitations of their approach <a href="https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations">here</a>.</p>
+<p>The Accurate Helm chart default is to install and manage CRDs with Helm and
+add annotations preventing Helm from uninstalling the CRD when the Helm release is uninstalled.</p>
+<p>The recommended approach is to let helm manage CRDs, but if you want to manage CRDs yourself, now is the time.</p>
+<pre><code class="language-console">$  kubectl apply -k https://github.com/cybozu-go/accurate//config/crd-only/
+</code></pre>
+<blockquote>
+<p>NOTE:</p>
+<p>Since the CRDs contain configuration of conversion webhooks, you may have to tweak the webhook settings
+if installing the chart using non-standard values.</p>
+</blockquote>
+<p>If you decided to manage CRDs outside of Helm, make sure you set the <code>crds.enabled</code> Helm value to <code>false</code>.</p>
 <h3 id="installing-the-chart"><a class="header" href="#installing-the-chart">Installing the Chart</a></h3>
 <blockquote>
 <p>NOTE:</p>
@@ -385,36 +495,41 @@ helm repo update
 <pre><code class="language-console">$ helm install --create-namespace --namespace accurate accurate -f values.yaml accurate/accurate
 </code></pre>
 <h2 id="values"><a class="header" href="#values">Values</a></h2>
-<table><thead><tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody>
 <tr><td>controller.additionalRBAC.rules</td><td>list</td><td><code>[]</code></td><td>Specify the RBAC rules to be added to the controller. ClusterRole and ClusterRoleBinding are created with the names <code>{{ release name }}-additional-resources</code>. The rules defined here will be used for the ClusterRole rules.</td></tr>
-<tr><td>controller.config.annotationKeys</td><td>list</td><td><code>[]</code></td><td>Annotations to be propagated to sub-namespaces. It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.</td></tr>
-<tr><td>controller.config.labelKeys</td><td>list</td><td><code>[]</code></td><td>Labels to be propagated to sub-namespaces. It is also possible to specify a glob pattern that can be interpreted by Go's &quot;path.Match&quot; func.</td></tr>
-<tr><td>controller.config.watches</td><td>list</td><td><code>[{&quot;group&quot;:&quot;rbac.authorization.k8s.io&quot;,&quot;kind&quot;:&quot;Role&quot;,&quot;version&quot;:&quot;v1&quot;},{&quot;group&quot;:&quot;rbac.authorization.k8s.io&quot;,&quot;kind&quot;:&quot;RoleBinding&quot;,&quot;version&quot;:&quot;v1&quot;},{&quot;kind&quot;:&quot;Secret&quot;,&quot;version&quot;:&quot;v1&quot;}]</code></td><td>List of GVK for namespace-scoped resources that can be propagated. Any namespace-scoped resource is allowed.</td></tr>
+<tr><td>controller.additionalRBAC.clusterRoles</td><td>list</td><td><code>[]</code></td><td>Specify additional ClusterRoles to be granted to the accurate controller. "admin" is recommended to allow the controller to manage common namespace-scoped resources.</td></tr>
+<tr><td>controller.config.annotationKeys</td><td>list</td><td><code>[]</code></td><td>Annotations to be propagated to sub-namespaces. It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.</td></tr>
+<tr><td>controller.config.labelKeys</td><td>list</td><td><code>[]</code></td><td>Labels to be propagated to sub-namespaces. It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.</td></tr>
+<tr><td>controller.config.watches</td><td>list</td><td><code>[{"group":"rbac.authorization.k8s.io","kind":"Role","version":"v1"},{"group":"rbac.authorization.k8s.io","kind":"RoleBinding","version":"v1"},{"kind":"Secret","version":"v1"}]</code></td><td>List of GVK for namespace-scoped resources that can be propagated. Any namespace-scoped resource is allowed.</td></tr>
+<tr><td>controller.config.propagateAnnotationKeyExcludes</td><td>list</td><td><code>["*kubernetes.io/*"]</code></td><td>Annotations to exclude when propagating resources. It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.</td></tr>
+<tr><td>controller.config.propagateLabelKeyExcludes</td><td>list</td><td><code>["*kubernetes.io/*"]</code></td><td>Labels to exclude when propagating resources. It is also possible to specify a glob pattern that can be interpreted by Go's "path.Match" func.</td></tr>
 <tr><td>controller.extraArgs</td><td>list</td><td><code>[]</code></td><td>Optional additional arguments.</td></tr>
 <tr><td>controller.replicas</td><td>int</td><td><code>2</code></td><td>Specify the number of replicas of the controller Pod.</td></tr>
-<tr><td>controller.resources</td><td>object</td><td><code>{&quot;requests&quot;:{&quot;cpu&quot;:&quot;100m&quot;,&quot;memory&quot;:&quot;20Mi&quot;}}</code></td><td>Specify resources.</td></tr>
+<tr><td>controller.resources</td><td>object</td><td><code>{"requests":{"cpu":"100m","memory":"20Mi"}}</code></td><td>Specify resources.</td></tr>
 <tr><td>controller.terminationGracePeriodSeconds</td><td>int</td><td><code>10</code></td><td>Specify terminationGracePeriodSeconds.</td></tr>
+<tr><td>webhook.allowCascadingDeletion</td><td>bool</td><td><code>false</code></td><td>Enable to allow cascading deletion of namespaces. Accurate webhooks will only allow deletion of a namespace with children if this option is enabled.</td></tr>
 <tr><td>image.pullPolicy</td><td>string</td><td><code>nil</code></td><td>Accurate image pullPolicy.</td></tr>
-<tr><td>image.repository</td><td>string</td><td><code>&quot;ghcr.io/cybozu-go/accurate&quot;</code></td><td>Accurate image repository to use.</td></tr>
+<tr><td>image.repository</td><td>string</td><td><code>"ghcr.io/cybozu-go/accurate"</code></td><td>Accurate image repository to use.</td></tr>
 <tr><td>image.tag</td><td>string</td><td><code>{{ .Chart.AppVersion }}</code></td><td>Accurate image tag to use.</td></tr>
+<tr><td>crds.enabled</td><td>bool</td><td><code>true</code></td><td>Decides if the CRDs should be installed as part of the Helm installation.</td></tr>
+<tr><td>crds.keep</td><td>bool</td><td><code>true</code></td><td>Setting this to <code>true</code> will prevent Helm from uninstalling the CRD when the Helm release is uninstalled.</td></tr>
+<tr><td>installCRDs</td><td>bool</td><td><code>true</code></td><td>Controls if CRDs are automatically installed and managed as part of your Helm release. Deprecated: Use <code>crds.enabled</code> and <code>crds.keep</code> instead.</td></tr>
 </tbody></table>
+</div>
 <h2 id="generate-manifests"><a class="header" href="#generate-manifests">Generate Manifests</a></h2>
 <p>You can use the <code>helm template</code> command to render manifests.</p>
 <pre><code class="language-console">$ helm template --namespace accurate accurate accurate/accurate
 </code></pre>
-<h2 id="upgrade-crds"><a class="header" href="#upgrade-crds">Upgrade CRDs</a></h2>
-<p>There is no support at this time for upgrading or deleting CRDs using Helm.
-Users must manually upgrade the CRD if there is a change in the CRD used by Accurate.</p>
-<p>https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#install-a-crd-declaration-before-using-the-resource</p>
-<h2 id="release-chart"><a class="header" href="#release-chart">Release Chart</a></h2>
-<p>Accurate Helm Chart will be released independently.
-This will prevent the Accurate version from going up just by modifying the Helm Chart.</p>
-<p>You must change the version of <code>Chart.yaml</code> when making changes to the Helm Chart.
-CI fails with lint error when creating a Pull Request without changing the version of <code>Chart.yaml</code>.</p>
-<p>When a pull request with Chart changes is merged into the main branch, <a href="https://github.com/helm/chart-releaser-action">helm/chart-releaser-action</a> will automatically create a GitHub release.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installing-kubectl-plugin"><a class="header" href="#installing-kubectl-plugin">Installing kubectl plugin</a></h1>
 <p><code>kubectl-accurate</code> is a plugin for <code>kubectl</code> to make operations of Accurate easy.</p>
 <p>It is strongly recommended to install <code>kubectl-accurate</code> though Accurate can be used without the plugin.</p>
+<h2 id="installing-using-krew"><a class="header" href="#installing-using-krew">Installing using Krew</a></h2>
+<p><a href="https://krew.sigs.k8s.io/">Krew</a> is the plugin manager for kubectl command-line tool.</p>
+<p>See the <a href="https://krew.sigs.k8s.io/docs/user-guide/setup/install/">documentation</a> for how to install Krew.</p>
+<pre><code class="language-console">$ kubectl krew update
+$ kubectl krew install accurate
+</code></pre>
+<h2 id="installing-manually"><a class="header" href="#installing-manually">Installing manually</a></h2>
 <ol>
 <li>
 <p>Set <code>OS</code> to the operating system name</p>
@@ -431,11 +546,16 @@ CI fails with lint error when creating a Pull Request without changing the versi
 </code></pre>
 </li>
 <li>
+<p>Set <code>VERSION</code> to the accurate version</p>
+<p>See the Accurate release page: https://github.com/cybozu-go/accurate/releases</p>
+<pre><code class="language-console">$ VERSION=&lt; The version you want to install &gt;
+</code></pre>
+</li>
+<li>
 <p>Download the binary and put it in a directory of your <code>PATH</code>.</p>
 <p>The following is an example to install the plugin in <code>/usr/local/bin</code>.</p>
-<pre><code class="language-console">$ sudo curl -o /usr/local/bin/kubectl-accurate -sLf \
-  https://github.com/cybozu-go/accurate/releases/latest/download/kubectl-accurate-${OS}-${ARCH}
-$ sudo chmod a+x /usr/local/bin/kubectl-accurate
+<pre><code class="language-console">$ curl -L -sS https://github.com/cybozu-go/accurate/releases/download/$(VERSION)/kubectl-accurate_$(VERSION)_$(OS)_$(ARCH).tar.gz \
+  | tar xz -C /usr/local/bin kubectl-accurate
 </code></pre>
 </li>
 <li>
@@ -556,7 +676,16 @@ metadata:
   annotations:
     accurate.cybozu.com/propagate: &lt;mode&gt;
 </code></pre>
-<h2 id="annotating-a-resource-to-propagate-resources-created-from-it"><a class="header" href="#annotating-a-resource-to-propagate-resources-created-from-it">Annotating a resource to propagate resources created from it</a></h2>
+<h2 id="annotating-a-resource-to-propagate-resources-created-from-it-deprecated"><a class="header" href="#annotating-a-resource-to-propagate-resources-created-from-it-deprecated">Annotating a resource to propagate resources created from it (DEPRECATED)</a></h2>
+<blockquote>
+<p>[!WARNING]<br />
+Propagating generated resources is a deprecated feature and is subject for
+removal soon. Commonly used tools like cert-manager and sealed-secrets now
+provide features for adding annotations/labels to resources created from
+user-facing custom resources. These features can be used for migration to
+ensure the standard <code>accurate.cybozu.com/propagate</code> annotation is added to
+generated resources.</p>
+</blockquote>
 <p>For example, a Secret created from cert-manager's Certificate can automatically be propagated.</p>
 <p>To do this, Certificate should be annotated with <code>accurate.cybozu.com/propagate-generated=&lt;mode&gt;</code> at the time of creation.</p>
 <pre><code class="language-yaml">apiVersion: cert-manager.io/v1
@@ -590,6 +719,7 @@ metadata:
     accurate.cybozu.com/type: root
     team: foo
 </code></pre>
+<p>Accurate only propagates labels/annotations that have been configured in that respect via the <code>labelKeys</code> and <code>annotationKeys</code> parameters in <code>config.yaml</code>. This prevents the propagation of labels/annotations that were not meant to do so.</p>
 <h3 id="preparing-resources-for-tenant-users"><a class="header" href="#preparing-resources-for-tenant-users">Preparing resources for tenant users</a></h3>
 <p>In almost all cases, a root Namespace should have RoleBinding for a group of tenant users.
 The RoleBinding should be annotated with <code>accurate.cybozu.com/propagate=update</code>.</p>
@@ -621,12 +751,32 @@ subjects:
 <pre><code class="language-console">$ kubectl accurate sub create &lt;name&gt; &lt;parent&gt;
 </code></pre>
 <p>Applying YAML manifests:</p>
-<pre><code class="language-console">apiVersion: accurate.cybozu.com/v1
+<pre><code class="language-console">apiVersion: accurate.cybozu.com/v2
 kind: SubNamespace
 metadata:
   namespace: &lt;parent&gt;
   name: &lt;name&gt;
 </code></pre>
+<h3 id="creating-a-sub-namespace-with-additional-labelsannotations"><a class="header" href="#creating-a-sub-namespace-with-additional-labelsannotations">Creating a sub-namespace with additional labels/annotations</a></h3>
+<p>Using <code>kubectl accurate</code>:</p>
+<pre><code class="language-console">$ kubectl accurate sub create &lt;name&gt; &lt;parent&gt; --labels=foo=bar --annotations=baz=zot
+</code></pre>
+<p>Applying YAML manifests:</p>
+<pre><code class="language-console">apiVersion: accurate.cybozu.com/v2
+kind: SubNamespace
+metadata:
+  namespace: &lt;parent&gt;
+  name: &lt;name&gt;
+spec:
+  labels:
+    foo: bar
+  annotations:
+    baz: zot
+</code></pre>
+<p>You can edit these <code>spec.labels/spec.annotations</code> with <code>kubectl edit</code>:</p>
+<pre><code class="language-console">$ kubectl edit SubNamespace -n=&lt;parent&gt; &lt;name&gt;
+</code></pre>
+<p>The <code>spec.labels/spec.annotations</code> that can be propagated to sub-namespaces can be set with the <code>subNamespaceLabelKeys/subNamespaceAnnotationKeys</code> parameters in config.yaml.</p>
 <h2 id="deleting-a-created-sub-namespace"><a class="header" href="#deleting-a-created-sub-namespace">Deleting a created sub-namespace</a></h2>
 <p>Using <code>kubectl accurate</code>:</p>
 <pre><code class="language-console">$ kubectl accurate sub delete &lt;name&gt;
@@ -680,20 +830,32 @@ metadata:
 <h3 id="sub-resources"><a class="header" href="#sub-resources">Sub Resources</a></h3>
 <ul>
 <li><a href="crd_subnamespace.html#subnamespacelist">SubNamespaceList</a></li>
+<li><a href="crd_subnamespace.html#subnamespacespec">SubNamespaceSpec</a></li>
 </ul>
 <h4 id="subnamespace"><a class="header" href="#subnamespace">SubNamespace</a></h4>
-<p>SubNamespace is the Schema for the subnamespaces API</p>
-<table><thead><tr><th>Field</th><th>Description</th><th>Scheme</th><th>Required</th></tr></thead><tbody>
+<p>SubNamespace is the Schema for the subnamespaces API Deprecated: This type will be removed in one of the next releases.</p>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th>Description</th><th>Scheme</th><th>Required</th></tr></thead><tbody>
 <tr><td>metadata</td><td></td><td>metav1.ObjectMeta</td><td>false</td></tr>
+<tr><td>spec</td><td>Spec is the spec of SubNamespace.</td><td><a href="crd_subnamespace.html#subnamespacespec">SubNamespaceSpec</a></td><td>false</td></tr>
 <tr><td>status</td><td>Status is the status of SubNamespace.</td><td>SubNamespaceStatus</td><td>false</td></tr>
 </tbody></table>
+</div>
 <p><a href="crd_subnamespace.html#custom-resources">Back to Custom Resources</a></p>
 <h4 id="subnamespacelist"><a class="header" href="#subnamespacelist">SubNamespaceList</a></h4>
-<p>SubNamespaceList contains a list of SubNamespace</p>
-<table><thead><tr><th>Field</th><th>Description</th><th>Scheme</th><th>Required</th></tr></thead><tbody>
+<p>SubNamespaceList contains a list of SubNamespace Deprecated: This type will be removed in one of the next releases.</p>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th>Description</th><th>Scheme</th><th>Required</th></tr></thead><tbody>
 <tr><td>metadata</td><td></td><td>metav1.ListMeta</td><td>false</td></tr>
 <tr><td>items</td><td></td><td>[]<a href="crd_subnamespace.html#subnamespace">SubNamespace</a></td><td>true</td></tr>
 </tbody></table>
+</div>
+<p><a href="crd_subnamespace.html#custom-resources">Back to Custom Resources</a></p>
+<h4 id="subnamespacespec"><a class="header" href="#subnamespacespec">SubNamespaceSpec</a></h4>
+<p>SubNamespaceSpec defines the desired state of SubNamespace</p>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th>Description</th><th>Scheme</th><th>Required</th></tr></thead><tbody>
+<tr><td>labels</td><td>Labels are the labels to be propagated to the sub-namespace</td><td>map[string]string</td><td>false</td></tr>
+<tr><td>annotations</td><td>Annotations are the annotations to be propagated to the sub-namespace.</td><td>map[string]string</td><td>false</td></tr>
+</tbody></table>
+</div>
 <p><a href="crd_subnamespace.html#custom-resources">Back to Custom Resources</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="kubectl-accurate"><a class="header" href="#kubectl-accurate">kubectl-accurate</a></h1>
@@ -732,7 +894,7 @@ metadata:
 <pre><code>Flags:
       --as string                      Username to impersonate for the operation
       --as-group stringArray           Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
-      --cache-dir string               Default cache directory (default &quot;$HOME/.kube/cache&quot;)
+      --cache-dir string               Default cache directory (default "$HOME/.kube/cache")
       --certificate-authority string   Path to a cert file for the certificate authority
       --client-certificate string      Path to a client certificate file for TLS
       --client-key string              Path to a client key file for TLS
@@ -741,7 +903,7 @@ metadata:
       --insecure-skip-tls-verify       If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
       --kubeconfig string              Path to the kubeconfig file to use for CLI requests.
   -n, --namespace string               If present, the namespace scope for this CLI request
-      --request-timeout string         The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests. (default &quot;0&quot;)
+      --request-timeout string         The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests. (default "0")
   -s, --server string                  The address and port of the Kubernetes API server
       --tls-server-name string         Server name to use for server certificate validation. If it is not provided, the hostname used to contact the server is used
       --token string                   Bearer token for authentication to the API server
@@ -794,16 +956,25 @@ to propagate resources from parents to their children namespaces.</p>
 The default location is <code>/etc/accurate/config.yaml</code>.
 The location can be changed with <code>--config-file</code> flag.</p>
 <p>The configuration file should be a JSON or YAML file having the following keys:</p>
-<table><thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>labelKeys</code></td><td><code>[]string</code></td><td>Keys of namespace labels to be propagated.</td></tr>
 <tr><td><code>annotationKeys</code></td><td><code>[]string</code></td><td>Keys of namespace annotations to be propagated.</td></tr>
+<tr><td><code>subNamespaceLabelKeys</code></td><td><code>[]string</code></td><td>Keys of SubNamespace labels to be propagated.</td></tr>
+<tr><td><code>subNamespaceAnnotationKeys</code></td><td><code>[]string</code></td><td>Keys of SubNamespace annotations to be propagated.</td></tr>
 <tr><td><code>watches</code></td><td><code>[]object</code></td><td>GroupVersionKind of namespace-scoped objects to be propagated.</td></tr>
 </tbody></table>
+</div>
 <p>Example:</p>
 <pre><code class="language-yaml">labelKeys:
 - team
 
 annotationKeys:
+- foo.bar/baz
+
+subNamespaceLabelKeys:
+- app
+
+subNamespaceAnnotationKeys:
 - foo.bar/baz
 
 watches:
@@ -817,31 +988,33 @@ watches:
   kind: Secret
 </code></pre>
 <h2 id="environment-variables"><a class="header" href="#environment-variables">Environment variables</a></h2>
-<table><thead><tr><th>Name</th><th>Required</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Required</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>POD_NAMESPACE</code></td><td>Yes</td><td>The namespace name where <code>accurate-controller</code> is running.</td></tr>
 </tbody></table>
+</div>
 <h2 id="command-line-flags"><a class="header" href="#command-line-flags">Command-line flags</a></h2>
 <pre><code>Flags:
       --add_dir_header                   If true, adds the file directory to the header
       --alsologtostderr                  log to standard error as well as files
+      --apiserver-qps-throttle int       The maximum QPS to the API server. (default 50)
       --cert-dir string                  webhook certificate directory
-      --config-file string               Configuration file path (default &quot;/etc/accurate/config.yaml&quot;)
-      --health-probe-addr string         Listen address for health probes (default &quot;:8081&quot;)
+      --config-file string               Configuration file path (default "/etc/accurate/config.yaml")
+      --health-probe-addr string         Listen address for health probes (default ":8081")
   -h, --help                             help for accurate-controller
-      --leader-election-id string        ID for leader election by controller-runtime (default &quot;accurate&quot;)
+      --leader-election-id string        ID for leader election by controller-runtime (default "accurate")
       --log_backtrace_at traceLocation   when logging hits line file:N, emit a stack trace (default :0)
       --log_dir string                   If non-empty, write log files in this directory
       --log_file string                  If non-empty, use this log file
       --log_file_max_size uint           Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
       --logtostderr                      log to standard error instead of files (default true)
-      --metrics-addr string              The address the metric endpoint binds to (default &quot;:8080&quot;)
+      --metrics-addr string              The address the metric endpoint binds to (default ":8080")
       --skip_headers                     If true, avoid header prefixes in the log messages
       --skip_log_headers                 If true, avoid headers when opening log files
       --stderrthreshold severity         logs at or above this threshold go to stderr (default 2)
   -v, --v Level                          number for the log level verbosity
       --version                          version for accurate-controller
       --vmodule moduleSpec               comma-separated list of pattern=N settings for file-filtered logging
-      --webhook-addr string              Listen address for the webhook endpoint (default &quot;:9443&quot;)
+      --webhook-addr string              Listen address for the webhook endpoint (default ":9443")
       --zap-devel                        Development Mode defaults(encoder=consoleEncoder,logLevel=Debug,stackTraceLevel=Warn). Production Mode defaults(encoder=jsonEncoder,logLevel=Info,stackTraceLevel=Error)
       --zap-encoder encoder              Zap log encoding (one of 'json' or 'console')
       --zap-log-level level              Zap Level to configure the verbosity of logging. Can be one of 'debug', 'info', 'error', or any integer value &gt; 0 which corresponds to custom debug levels of increasing verbosity
@@ -849,21 +1022,21 @@ watches:
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="labels-used-by-accurate"><a class="header" href="#labels-used-by-accurate">Labels used by Accurate</a></h1>
 <p>The table below is a list of labels used by Accurate.</p>
-<table><thead><tr><th>Key</th><th>Value</th><th>Resource</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Key</th><th>Value</th><th>Resource</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>accurate.cybozu.com/type</code></td><td><code>template</code> or <code>root</code></td><td>Namespace</td><td>The type of namespace.</td></tr>
 <tr><td><code>accurate.cybozu.com/template</code></td><td>Namespace name</td><td>Namespace</td><td>The template namespace name.</td></tr>
 <tr><td><code>accurate.cybozu.com/parent</code></td><td>Namespace name</td><td>Namespace</td><td>The parent namespace name.</td></tr>
 <tr><td><code>app.kubernetes.io/created-by</code></td><td><code>accurate</code></td><td>Copied or propagated resources, sub-namespaces</td><td>Informational</td></tr>
 </tbody></table>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="annotations-used-by-accurate"><a class="header" href="#annotations-used-by-accurate">Annotations used by Accurate</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="annotations-used-by-accurate"><a class="header" href="#annotations-used-by-accurate">Annotations used by Accurate</a></h1>
 <p>The table below is a list of annotations used by Accurate.</p>
-<table><thead><tr><th>Key</th><th>Value</th><th>Resource</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Key</th><th>Value</th><th>Resource</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>accurate.cybozu.com/from</code></td><td>Namespace name</td><td>Copied or propagated resources</td><td>The namespace name from which the source resource was copied.</td></tr>
-<tr><td><code>accurate.cybozu.com/propagate</code></td><td><code>&quot;create&quot;</code> or <code>&quot;update&quot;</code></td><td>Namespace-scoped resources</td><td>Specify propagation mode.</td></tr>
-<tr><td><code>accurate.cybozu.com/propagate-generated</code></td><td><code>&quot;create&quot;</code> or <code>&quot;update&quot;</code></td><td>Namespace-scoped resources</td><td>Specify propagation mode of generated resources.</td></tr>
-<tr><td><code>accurate.cybozu.com/generated</code></td><td><code>false</code></td><td>Namespace-scoped resources</td><td>The result of checking if this is generated from another resource.</td></tr>
+<tr><td><code>accurate.cybozu.com/propagate</code></td><td><code>"create"</code> or <code>"update"</code></td><td>Namespace-scoped resources</td><td>Specify propagation mode.</td></tr>
+<tr><td><code>accurate.cybozu.com/propagate-generated</code> ⚠️</td><td><code>"create"</code> or <code>"update"</code></td><td>Namespace-scoped resources</td><td><code>DEPRECATED</code> Specify propagation mode of generated resources.</td></tr>
+<tr><td><code>accurate.cybozu.com/generated</code> ⚠️</td><td><code>false</code></td><td>Namespace-scoped resources</td><td><code>DEPRECATED</code> The result of checking if this is generated from another resource.</td></tr>
 </tbody></table>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="design-notes"><a class="header" href="#design-notes">Design notes</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="design-notes"><a class="header" href="#design-notes">Design notes</a></h1>
 <ul>
 <li><a href="design.html#overview">Overview</a></li>
 <li><a href="design.html#why-do-we-need-another-namespace-controller-in-the-first-place">Why do we need another namespace controller in the first place?</a></li>
@@ -914,7 +1087,7 @@ Since we consider resource-propagation alone is highly useful, the feature is av
 <li><code>update</code>: if the resource is missing or different from the parent namespace, create or update it.  If the parent resource is deleted, the copy will also be deleted.</li>
 </ul>
 </li>
-<li>Propagate generated resources
+<li>⚠️ Propagate generated resources (DEPRECATED)
 <ul>
 <li>Resources created and controlled by another resource can be automatically propagated.</li>
 <li>The generator resource should be annotated with <code>accurate.cybozu.com/propagate-generated: &lt;mode&gt;</code>.</li>
@@ -924,6 +1097,7 @@ Since we consider resource-propagation alone is highly useful, the feature is av
 <ul>
 <li>The label/annotation keys are given through the configuration file of Accurate.</li>
 <li>Only labels/annotations specified in the configuration file of Accurate will be propagated.</li>
+<li>Label/annotation deletions from parent or template namespaces will not be propagated.</li>
 </ul>
 </li>
 <li>Opt-in root namespaces
@@ -933,7 +1107,7 @@ Since we consider resource-propagation alone is highly useful, the feature is av
 </li>
 <li>Tenant users can create and delete sub-namespaces by creating and deleting a custom resource in a root or a sub-namespace.
 <ul>
-<li>If a namespace has one or more sub-namespaces, Accurate prevents the deletion of the namespace.</li>
+<li>If a namespace has one or more sub-namespaces, Accurate prevents the deletion of the namespace - unless allow cascading deletion of namespaces is enabled.</li>
 </ul>
 </li>
 <li>Template namespace
@@ -996,7 +1170,7 @@ In addition, it needs to watch any kind of resources specified in its config fil
 </ul>
 </li>
 </ul>
-<h3 id="namespaces-wo-accuratecybozucomfrom-and-accuratecybozucomtemplate-labels"><a class="header" href="#namespaces-wo-accuratecybozucomfrom-and-accuratecybozucomtemplate-labels">Namespaces w/o <code>accurate.cybozu.com/from</code> and <code>accurate.cybozu.com/template</code> labels</a></h3>
+<h3 id="namespaces-wo-accuratecybozucomtype-and-accuratecybozucomtemplate-labels"><a class="header" href="#namespaces-wo-accuratecybozucomtype-and-accuratecybozucomtemplate-labels">Namespaces w/o <code>accurate.cybozu.com/type</code> and <code>accurate.cybozu.com/template</code> labels</a></h3>
 <p>If these labels are removed from the Namespace, Accurate should delete propagated resources with mode == <code>update</code>.</p>
 <h3 id="template-namespace"><a class="header" href="#template-namespace">Template namespace</a></h3>
 <p>Template namespaces are namespaces labeled with <code>accurate.cybozu.com/type=template</code>.</p>
@@ -1041,107 +1215,90 @@ With this rule, Accurate can delete such orphaned resources when the controller 
 <li>If the resource exists and the annotation value is <code>update</code>, Accurate creates or updates a copy in all sub-namespaces if missing or different.</li>
 <li>When a resource is deleted, Accurate checks sub-namespaces and delete the resource of the same kind and the same name if the resource is annotated with <code>accurate.cybozu.com/propagate=update</code>.</li>
 </ul>
-<h3 id="resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated"><a class="header" href="#resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated">Resources owned by another resource that is annotated with <code>accurate.cybozu.com/propagate-generated</code></a></h3>
+<h3 id="resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated-deprecated"><a class="header" href="#resources-owned-by-another-resource-that-is-annotated-with-accuratecybozucompropagate-generated-deprecated">Resources owned by another resource that is annotated with <code>accurate.cybozu.com/propagate-generated</code> (DEPRECATED)</a></h3>
 <p>Accurate annotates the resource with <code>accurate.cybozu.com/propagate</code>.
 The annotation value is the same as <code>accurate.cybozu.com/propagate-generated</code> annotation.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="release-procedure"><a class="header" href="#release-procedure">Release procedure</a></h1>
-<p>This document describes how to release a new version of Accurate.</p>
+<p>This document describes how to release a new version.</p>
+<h2 id="labeling"><a class="header" href="#labeling">Labeling</a></h2>
+<p>Release notes are automatically generated based on PRs included in the release.
+Those PRs are categorized based on the label assigned to them.
+Please refer to <code>.github/release.yml</code> for the kind of labels.</p>
 <h2 id="versioning"><a class="header" href="#versioning">Versioning</a></h2>
 <p>Follow <a href="https://semver.org/spec/v2.0.0.html">semantic versioning 2.0.0</a> to choose the new version number.</p>
-<h2 id="prepare-change-log-entries"><a class="header" href="#prepare-change-log-entries">Prepare change log entries</a></h2>
-<p>Add notable changes since the last release to <a href="CHANGELOG.html">CHANGELOG.md</a>.
-It should look like:</p>
-<pre><code class="language-markdown">(snip)
-## [Unreleased]
-
-### Added
-- Implement ... (#35)
-
-### Changed
-- Fix a bug in ... (#33)
-
-### Removed
-- Deprecated `-option` is removed ... (#39)
-
-(snip)
-</code></pre>
 <h2 id="bump-version"><a class="header" href="#bump-version">Bump version</a></h2>
 <ol>
 <li>
-<p>Determine a new version number.  Let it write <code>$VERSION</code> as <code>VERSION=x.y.z</code>.</p>
-</li>
-<li>
-<p>Make a branch to release</p>
-<pre><code class="language-console">$ git neco dev &quot;bump-$VERSION&quot;
+<p>Determine a new version number. Then set <code>VERSION</code> variable.</p>
+<pre><code class="language-console"># Set VERSION and confirm it. It should not have "v" prefix.
+$ VERSION=x.y.z
+$ echo $VERSION
 </code></pre>
-</li>
-<li>
-<p>Update version strings in <code>kustomization.yaml</code> and <code>version.go</code> in the top directory.</p>
-</li>
-<li>
-<p>Edit <code>CHANGELOG.md</code> for the new version (<a href="https://github.com/cybozu-go/etcdpasswd/commit/77d95384ac6c97e7f48281eaf23cb94f68867f79">example</a>).</p>
-</li>
-<li>
-<p>Commit the change and push it.</p>
-<pre><code class="language-console">$ git commit -a -m &quot;Bump version to $VERSION&quot;
-$ git neco review
-</code></pre>
-</li>
-<li>
-<p>Merge this branch.</p>
 </li>
 <li>
 <p>Add a git tag to the main HEAD, then push it.</p>
 <pre><code class="language-console">$ git checkout main
-$ git pull
-$ git tag -a -m &quot;Release v$VERSION&quot; &quot;v$VERSION&quot;
-$ git push origin &quot;v$VERSION&quot;
+$ git tag -a -m "Release v$VERSION" "v$VERSION"
+$ git tag -ln | grep $VERSION
+$ git push origin v$VERSION
 </code></pre>
 </li>
 </ol>
-<p>GitHub actions will build and push artifacts such as container images and
-create a new GitHub release.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="maintenance"><a class="header" href="#maintenance">Maintenance</a></h1>
+<h2 id="how-to-update-supported-kubernetes"><a class="header" href="#how-to-update-supported-kubernetes">How to update supported Kubernetes</a></h2>
+<p>Accurate supports the three latest Kubernetes versions.
+If a new Kubernetes is released, please update the following files.</p>
+<ul>
+<li>Update Kubernetes version in <code>e2e/Makefile</code> and <code>.github/workflows/ci.yaml</code>.</li>
+<li>Update kubectl version in <code>aqua.yaml</code>.</li>
+<li>Update <code>k8s.io/*</code> and <code>sigs.k8s.io/controller-runtime</code> packages version in <code>go.mod</code>.</li>
+</ul>
+<p>If Kubernetes or controller-runtime API has changed, please fix the relevant source code.</p>
+<h2 id="how-to-update-dependencies"><a class="header" href="#how-to-update-dependencies">How to update dependencies</a></h2>
+<p>Renovate will create PRs that update dependencies once a week.
+However, Kubernetes is only updated with patched versions.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-                        
+
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                            </nav>
+
+            </nav>
 
         </div>
 
-        
-        
-        
-                <script type="text/javascript">
+
+
+
+        <script>
             window.playground_copyable = true;
         </script>
-        
-        
-                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
-                        <script type="text/javascript">
+
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-                
+
+    </div>
     </body>
 </html>
