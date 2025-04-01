@@ -4,8 +4,9 @@ FROM --platform=$BUILDPLATFORM ghcr.io/cybozu/golang:1.23-jammy AS builder
 COPY ./ .
 
 # Build the binary, cross-compiling if necessary
-ARG TARGETPLATFORM
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETPLATFORM \
+ARG TARGETOS
+ARG TARGETARCH
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
 	go build -ldflags="-w -s" -o accurate-controller ./cmd/accurate-controller
 
 # the controller image, this is in the target architecture.
