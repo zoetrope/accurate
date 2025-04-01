@@ -14,7 +14,7 @@ jobs:
         run: |
           docker buildx create --name=b --driver docker-container
           docker buildx use b
-          echo "TAG=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+          echo "TAG=1.0.0" >> $GITHUB_ENV
       - name: Build images
         run: |
           docker buildx build --platform=arm64,amd64 -t ghcr.io/zoetrope/accurate:$TAG .
