@@ -17,7 +17,7 @@ jobs:
           echo "TAG=1.0.1" >> $GITHUB_ENV
       - name: Build images
         run: |
-          docker buildx build --platform=linux/arm64,linux/amd64 -t ghcr.io/zoetrope/accurate:$TAG .
+          docker buildx build --platform=arm64,amd64 -t ghcr.io/zoetrope/accurate:$TAG .
       - name: Login to ghcr.io
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
       - name: Push images
